@@ -42,7 +42,7 @@
 </head>
 <body>
 <div id="ctn" align="center">
-    <form action="${pageContext.request.contextPath}/addmsg" method="post">
+    <form id="formSunmit" action="${pageContext.request.contextPath}/addmsg" method="post">
         <table cellpadding="8">
             <caption><h2>软工14信息填表处</h2></caption>
             <tbody>
@@ -77,7 +77,7 @@
                 </td>
             </tr>
             <tr>
-                <td>搂室号</td>
+                <td>楼室号</td>
                 <td>
                     <div><input type="text" name="address"></div>
                 </td>
@@ -104,7 +104,7 @@
             <tr>
                 <td>负责老师</td>
                 <td>
-                    <div><input type="text" name="teacher" value="胡杨"></div>
+                    <div><input type="text" name="teacher" value="胡炀"></div>
                 </td>
             </tr>
             <tr>
@@ -129,29 +129,57 @@
         </table>
     </form>
 
-    <button onclick="listinfo()">asdhgarhasg</button>
+    <a style="cursor: hand" onclick="listinfo()">查看班级报名情况</a>
+    <div id="showMsg"></div>
 </div>
 <script>
+    var submitStr;
+    submitStr = $("#formSunmit").html();
+    submitStr += '<a style="cursor: hand" onclick="listinfo()">查看班级报名情况</a>';
+
     var flag = "${flag}";
     console.log(flag);
     if (flag != null && flag != "") {
         window.alert(flag);
     }
 
-
     function listinfo() {
         $.ajax({
-            type: "POST",
-
+            type: "GET",
             async: false,
             url: "${pageContext.request.contextPath}/activity/getInfos",
-            data: {
-                flag: 1
-            },
             success: function (data) {
-                alert(data);
+                $("#formSunmit").hide();
+                showAllMsg(data);
             }
         });
+    }
+
+    function showAllMsg(data) {
+        var htmlstr = "<table border='1' cellspacing='0' cellpadding='0' id='allMsg'>";
+        htmlstr += "<caption><h2>软工14信息报名信息详情表</h2></caption>";
+
+        htmlstr += "<tr>";
+        for (var o in data[0]) {
+            htmlstr += "<th>" + o + "</th>";
+        }
+        htmlstr += "</tr>";
+
+        for (var i = 0; i < data.length; i++) {
+            htmlstr += "<tr>";
+            for (var o in data[i]) {
+                htmlstr += "<td>" + data[i][o] + "</td>";
+            }
+            htmlstr += "</tr>";
+        }
+        htmlstr += "</table>";
+        htmlstr += "<a style='cursor: hand' onclick='backTo()'>返回</a>";
+        $("#ctn").html(htmlstr);
+    }
+
+    function backTo() {
+        $("#allMsg").hide();
+        $("#ctn").html(submitStr);
     }
 
 </script>

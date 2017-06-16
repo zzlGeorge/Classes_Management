@@ -2,6 +2,7 @@ package com.lzGeorge.app.service.impl;
 
 import com.lzGeorge.app.dao.StayInSchoolMapper;
 import com.lzGeorge.app.dao.entity.StayInSchool;
+import com.lzGeorge.app.dao.entity.StayInSchoolCriteria;
 import com.lzGeorge.app.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
