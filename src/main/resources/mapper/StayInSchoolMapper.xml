@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzGeorge.app.dao.StayInSchoolMapper">
+    <resultMap id="BaseResultMap" type="com.lzGeorge.app.dao.entity.StayInSchool">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="college" property="college" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="snum" property="snum" jdbcType="VARCHAR"/>
+        <result column="classes" property="classes" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="dur_Time" property="durTime" jdbcType="VARCHAR"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="teacher" property="teacher" jdbcType="VARCHAR"/>
+        <result column="teacher_tel" property="teacherTel" jdbcType="VARCHAR"/>
+        <result column="record_time" property="recordTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, college, name, sex, snum, classes, address, tel, dur_Time, reason, teacher, teacher_tel, 
+    record_time
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.lzGeorge.app.dao.entity.StayInSchoolCriteria">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from stay_inschool
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from stay_inschool
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stay_inschool
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.lzGeorge.app.dao.entity.StayInSchoolCriteria">
+        delete from stay_inschool
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.lzGeorge.app.dao.entity.StayInSchool">
+    insert into stay_inschool (id, college, name, 
+      sex, snum, classes, 
+      address, tel, dur_Time, 
+      reason, teacher, teacher_tel, 
+      record_time)
+    values (#{id,jdbcType=INTEGER}, #{college,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{snum,jdbcType=VARCHAR}, #{classes,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{durTime,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, #{teacherTel,jdbcType=VARCHAR}, 
+      #{recordTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lzGeorge.app.dao.entity.StayInSchool">
+        insert into stay_inschool
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="college != null">
+                college,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="snum != null">
+                snum,
+            </if>
+            <if test="classes != null">
+                classes,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="durTime != null">
+                dur_Time,
+            </if>
+            <if test="reason != null">
+                reason,
+            </if>
+            <if test="teacher != null">
+                teacher,
+            </if>
+            <if test="teacherTel != null">
+                teacher_tel,
+            </if>
+            <if test="recordTime != null">
+                record_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="college != null">
+                #{college,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="snum != null">
+                #{snum,jdbcType=VARCHAR},
+            </if>
+            <if test="classes != null">
+                #{classes,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="durTime != null">
+                #{durTime,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null">
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="teacher != null">
+                #{teacher,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherTel != null">
+                #{teacherTel,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTime != null">
+                #{recordTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.lzGeorge.app.dao.entity.StayInSchoolCriteria"
+            resultType="java.lang.Integer">
+        select count(*) from stay_inschool
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update stay_inschool
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.college != null">
+                college = #{record.college,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.snum != null">
+                snum = #{record.snum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.classes != null">
+                classes = #{record.classes,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tel != null">
+                tel = #{record.tel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.durTime != null">
+                dur_Time = #{record.durTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reason != null">
+                reason = #{record.reason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacher != null">
+                teacher = #{record.teacher,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherTel != null">
+                teacher_tel = #{record.teacherTel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordTime != null">
+                record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update stay_inschool
+        set id = #{record.id,jdbcType=INTEGER},
+        college = #{record.college,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=VARCHAR},
+        snum = #{record.snum,jdbcType=VARCHAR},
+        classes = #{record.classes,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        tel = #{record.tel,jdbcType=VARCHAR},
+        dur_Time = #{record.durTime,jdbcType=VARCHAR},
+        reason = #{record.reason,jdbcType=VARCHAR},
+        teacher = #{record.teacher,jdbcType=VARCHAR},
+        teacher_tel = #{record.teacherTel,jdbcType=VARCHAR},
+        record_time = #{record.recordTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lzGeorge.app.dao.entity.StayInSchool">
+        update stay_inschool
+        <set>
+            <if test="college != null">
+                college = #{college,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="snum != null">
+                snum = #{snum,jdbcType=VARCHAR},
+            </if>
+            <if test="classes != null">
+                classes = #{classes,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="durTime != null">
+                dur_Time = #{durTime,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null">
+                reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="teacher != null">
+                teacher = #{teacher,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherTel != null">
+                teacher_tel = #{teacherTel,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTime != null">
+                record_time = #{recordTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lzGeorge.app.dao.entity.StayInSchool">
+    update stay_inschool
+    set college = #{college,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      snum = #{snum,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      dur_Time = #{durTime,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      teacher = #{teacher,jdbcType=VARCHAR},
+      teacher_tel = #{teacherTel,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <cache/>
+    <select resultMap="BaseResultMap" parameterType="com.lzGeorge.app.dao.entity.StayInSchoolCriteria"
+            id="selectByExampleWithRowbounds">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from stay_inschool
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+      SELECT * FROM stay_inschool
+  </select>
+</mapper>
