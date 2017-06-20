@@ -42,7 +42,7 @@
 </head>
 <body>
 <div id="ctn" align="center">
-    <form id="formSunmit" action="${pageContext.request.contextPath}/addmsg" method="post">
+    <form id="formSunmit" action="${pageContext.request.contextPath}/activity/addmsg" method="post">
         <table cellpadding="8">
             <caption><h2>软工14信息填表处</h2></caption>
             <tbody>
@@ -91,7 +91,7 @@
             <tr>
                 <td>留校时间</td>
                 <td>
-                    <div><input type="text" name="dur_Time"></div>
+                    <div><input type="text" name="durTime"></div>
                 </td>
             </tr>
             <tr>
@@ -110,7 +110,7 @@
             <tr>
                 <td>联系电话</td>
                 <td>
-                    <div><input type="text" name="teacher_tel" value="667000"></div>
+                    <div><input type="text" name="teacherTel" value="667000"></div>
                 </td>
             </tr>
             <tr>

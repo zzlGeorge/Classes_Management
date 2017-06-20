@@ -24,4 +24,12 @@ public class ActivityServiceImpl implements ActivityService {
         List<StayInSchool> stayInSchools = mapper.selectByExample(null);
         return stayInSchools;
     }
+
+    public int addMessages(StayInSchool stayInSchool) {
+        int returnFlag;
+        if (stayInSchool != null)
+            returnFlag = mapper.insertSelective(stayInSchool);
+        else returnFlag = 0;
+        return returnFlag;
+    }
 }
