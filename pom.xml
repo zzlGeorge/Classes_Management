@@ -194,6 +194,27 @@
             <version>1.9.12</version>
         </dependency>
 
+
+        <!-- RSA加解密依赖包 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>1.45</version>
+        </dependency>
+        <!-- 上面已有 -->
+        <!--<dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>-->
+
+        <!-- 导出Excel工具包 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.16</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -52,13 +52,7 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--<table tableName="role" domainObjectName="Role"
-               enableCountByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" enableUpdateByExample="true">
-            <generatedKey column="id" sqlStatement="JDBC" identity="true"></generatedKey>
-        </table>-->
-
-        <!--<table tableName="b_user" domainObjectName="User"/>-->
-        <table tableName="stay_inschool" domainObjectName="StayInSchool"/>
+        <!--<table tableName="stay_inschool" domainObjectName="StayInSchool"/>-->
+        <table tableName="studentinfo" domainObjectName="StudentInfo"/>
     </context>
 </generatorConfiguration>

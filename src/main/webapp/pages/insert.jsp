@@ -174,12 +174,17 @@
         }
         htmlstr += "</table>";
         htmlstr += "<a style='cursor: hand' onclick='backTo()'>返回</a>";
+        htmlstr += "<a style='cursor: hand' onclick='exportExl()'>导出报表</a>";
         $("#ctn").html(htmlstr);
     }
 
     function backTo() {
         $("#allMsg").hide();
         $("#ctn").html(submitStr);
+    }
+    
+    function exportExl() {
+
     }
 
 </script>

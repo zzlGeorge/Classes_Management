@@ -1,5 +1,7 @@
 package com.lzGeorge.app.service;
 
-public interface UserService {
+import com.lzGeorge.app.dao.entity.StudentInfo;
 
+public interface UserService {
+    StudentInfo login(Integer sno, String longTel);
 }
