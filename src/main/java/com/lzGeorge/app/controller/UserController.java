@@ -12,9 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by admin on 2017/6/16.
- */
 
 @Controller
 @RequestMapping("/user")
@@ -26,13 +23,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public BackMessage login(Integer sno, String longTel, HttpSession session) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        //检查已登录后不用重复登陆
-        if (session.getAttribute("loginUser") != null) {
-            return BackMessage.error("该用户已登录！");
-        }
-
-        if (sno == null || longTel.equals("") || longTel == null) {
+        if (sno == null || longTel.equals("")) {
             return BackMessage.error("输入项有误！");
         } else {
             StudentInfo studentInfo = userService.login(sno, longTel);

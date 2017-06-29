@@ -6,7 +6,7 @@
          version="3.0">
 
     <welcome-file-list>
-        <welcome-file>pages/insert.jsp</welcome-file>
+        <welcome-file>pages/login.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- 注入框架配置 -->

@@ -1,7 +1,6 @@
 package com.lzGeorge.app.utils;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by admin on 2017/6/21.
@@ -44,6 +43,20 @@ public class BackMessage extends HashMap {
         backMessage.clear();
         backMessage.put(RESULT, SUEECSS);
         backMessage.put(DESC, msg);
+        backMessage.put(key, data);
+        return backMessage;
+    }
+
+    /**
+     * 带数据的返回
+     *
+     * @param key  数据值的key值
+     * @param data 源数据
+     */
+    public static BackMessage successData(String key, Object data) {
+        BackMessage backMessage = getInstance();
+        backMessage.clear();
+        backMessage.put(RESULT, SUEECSS);
         backMessage.put(key, data);
         return backMessage;
     }

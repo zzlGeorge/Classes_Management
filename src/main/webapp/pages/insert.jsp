@@ -133,15 +133,20 @@
     <div id="showMsg"></div>
 </div>
 <script>
+
+    /*判断用户是否登陆状态*/
+    var loginUser = '${pageContext.session.getAttribute("loginUser")}';
+
+    $(document).ready(function () {
+        if (loginUser == '') {
+            window.location.href = "${pageContext.request.contextPath}/pages/login.jsp";
+        }
+    });
+
+    var successMsg;
     var submitStr;
     submitStr = $("#formSunmit").html();
     submitStr += '<a style="cursor: hand" onclick="listinfo()">查看班级报名情况</a>';
-
-    var flag = "${flag}";
-    console.log(flag);
-    if (flag != null && flag != "") {
-        window.alert(flag);
-    }
 
     function listinfo() {
         $.ajax({
@@ -149,6 +154,7 @@
             async: false,
             url: "${pageContext.request.contextPath}/activity/getInfos",
             success: function (data) {
+                successMsg = data;
                 $("#formSunmit").hide();
                 showAllMsg(data);
             }
@@ -173,8 +179,10 @@
             htmlstr += "</tr>";
         }
         htmlstr += "</table>";
-        htmlstr += "<a style='cursor: hand' onclick='backTo()'>返回</a>";
-        htmlstr += "<a style='cursor: hand' onclick='exportExl()'>导出报表</a>";
+        htmlstr += "<a style='cursor: hand' onclick='backTo()'>返回</a><br>";
+
+        /*htmlstr += "<a style='cursor: hand' onclick='exportExl()'>导出数据</a>";*/
+
         $("#ctn").html(htmlstr);
     }
 
@@ -182,9 +190,19 @@
         $("#allMsg").hide();
         $("#ctn").html(submitStr);
     }
-    
-    function exportExl() {
 
+    function exportExl() {
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/activity/exportExl",
+            dataType: "text",
+            success: function (data) {
+                window.alert(data);
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
     }
 
 </script>
