@@ -59,19 +59,6 @@
             width: 100px;
         }
 
-        #mdiv {
-            position: absolute;
-            left: -100px;
-            margin-left: 100%;
-            margin-top: 30px;
-        }
-
-        #music {
-            width: 56px;
-            height: 35px;
-            cursor: hand;
-        }
-
         .blur {
             -webkit-filter: blur(4px);
             filter: blur(4px);
@@ -79,26 +66,17 @@
     </style>
 </head>
 <body>
-<audio id="bgm" controls="controls" autoplay loop hidden>
-    <source src="${pageContext.request.contextPath}/audio/sweden.mp3">
-    <source src="${pageContext.request.contextPath}/audio/clark.mp3">
-    Your browser does not support the audio tag.
-</audio>
-<div id="mdiv" align="center">
-    <img id="music" src="${pageContext.request.contextPath}/images/on.png"/><br>
-    <span><b style="color: #ffffff">MUSIC</b></span>
-</div>
 
 <div class="lgContainer">
     <div id="title"><h3>学生登陆</h3></div>
     <table id="lgTable">
         <tr>
             <td class="qtd">学号：</td>
-            <td><input class="form-control" type="text" id="sno"/></td>
+            <td><input class="form-control" type="text" id="sno" placeholder="请输入您的学号"/></td>
         </tr>
         <tr>
             <td class="qtd">手机长号：</td>
-            <td><input class="form-control" type="password" id="longTel"/></td>
+            <td><input class="form-control" type="password" id="longTel" placeholder="请输入您的手机长号"/></td>
         </tr>
         <tr>
             <td class="qtd"></td>
@@ -111,7 +89,6 @@
 
 
 <script>
-    var media = $("#bgm")[0];
 
     $(document).ready(function () {
         $(".lgContainer").hover(
@@ -127,22 +104,9 @@
             }
         );
 
-        $("#music").bind('click', function () {
-            playAudio();
-        });
 
     });
 
-    //播放暂停切换
-    function playAudio() {
-        if (media.paused) {
-            media.play();
-            $("#music").attr({src: "${pageContext.request.contextPath}/images/on.png"});
-        } else {
-            media.pause();
-            $("#music").attr({src: "${pageContext.request.contextPath}/images/mute.png"});
-        }
-    }
 
     function loginS() {
         var username = $("#sno").val();
@@ -158,10 +122,13 @@
             dataType: 'json',
             success: function (data) {
                 window.alert(data.description);
-                window.location.href='${pageContext.request.contextPath}/pages/insert.jsp';
+                if (data.result > 0)
+                    window.location.href = '${pageContext.request.contextPath}/pages/insert.jsp';
+                console.info(data);
             },
-            error: function () {
+            error: function (e) {
                 window.alert('something error!');
+                console.info(e);
             }
         });
     }

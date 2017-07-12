@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>软工14信息填表处</title>
-    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 
     <style>
@@ -17,7 +17,7 @@
         }
 
         #ctn {
-            border-radius: 25px;
+            border-radius: 15px;
         }
 
         #ctn input, textarea {
@@ -26,25 +26,29 @@
             height: 30px;
         }
 
-        #ctn td div {
-            width: 200px;
-            height: 15px;
-            border: 2px #ffffff;
-            border-radius: 10px;
-        }
-
         #ctn button {
             background: rgba(0, 0, 0, 0);
             border-radius: 6px;
             width: 100px;
         }
+
+        #ctn table {
+            margin-top: 20px;
+        }
+
+        .ctn_size {
+            width: 500px;
+            height: auto;
+            margin-top: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<div id="ctn" align="center">
+<div id="ctn" class="container ctn_size">
     <form id="formSunmit" action="${pageContext.request.contextPath}/activity/addmsg" method="post">
-        <table cellpadding="8">
-            <caption><h2>软工14信息填表处</h2></caption>
+        <table class="table">
             <tbody>
             <tr>
                 <td>学院</td>
@@ -60,7 +64,7 @@
             </tr>
             <tr>
                 <td>性别</td>
-                <td><input type="radio" name="sex" value="男" checked>男&nbsp;&nbsp;&nbsp;&nbsp;
+                <td><input type="radio" name="sex" value="男" checked>男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="sex" value="女">女
                 </td>
             </tr>
@@ -114,10 +118,6 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td align="center">
                     <button type="submit">提交</button>
                 </td>
@@ -162,7 +162,7 @@
     }
 
     function showAllMsg(data) {
-        var htmlstr = "<table border='1' cellspacing='0' cellpadding='0' id='allMsg'>";
+        var htmlstr = "<table class='table table-bordered' id='allMsg'>";
         htmlstr += "<caption><h2>软工14信息报名信息详情表</h2></caption>";
 
         htmlstr += "<tr>";

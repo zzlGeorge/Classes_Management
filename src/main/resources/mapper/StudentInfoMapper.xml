@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzGeorge.app.dao.StudentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lzGeorge.app.dao.entity.StudentInfo" >
+    <id column="sno" property="sno" jdbcType="INTEGER" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="scode" property="scode" jdbcType="VARCHAR" />
+    <result column="ssex" property="ssex" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="snp" property="snp" jdbcType="VARCHAR" />
+    <result column="tell" property="tell" jdbcType="VARCHAR" />
+    <result column="tels" property="tels" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="sliving" property="sliving" jdbcType="VARCHAR" />
+    <result column="slive" property="slive" jdbcType="VARCHAR" />
+    <result column="youbian" property="youbian" jdbcType="VARCHAR" />
+    <result column="htell" property="htell" jdbcType="VARCHAR" />
+    <result column="sfathername" property="sfathername" jdbcType="VARCHAR" />
+    <result column="sftell" property="sftell" jdbcType="VARCHAR" />
+    <result column="smothername" property="smothername" jdbcType="VARCHAR" />
+    <result column="smtell" property="smtell" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sno, classes, sname, scode, ssex, sn, snp, tell, tels, qq, sliving, slive, youbian, 
+    htell, sfathername, sftell, smothername, smtell
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lzGeorge.app.dao.entity.StudentInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from studentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from studentinfo
+    where sno = #{sno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from studentinfo
+    where sno = #{sno,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lzGeorge.app.dao.entity.StudentInfoCriteria" >
+    delete from studentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lzGeorge.app.dao.entity.StudentInfo" >
+    insert into studentinfo (sno, classes, sname, 
+      scode, ssex, sn, snp, 
+      tell, tels, qq, sliving, 
+      slive, youbian, htell, 
+      sfathername, sftell, smothername, 
+      smtell)
+    values (#{sno,jdbcType=INTEGER}, #{classes,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{scode,jdbcType=VARCHAR}, #{ssex,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{snp,jdbcType=VARCHAR}, 
+      #{tell,jdbcType=VARCHAR}, #{tels,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{sliving,jdbcType=VARCHAR}, 
+      #{slive,jdbcType=VARCHAR}, #{youbian,jdbcType=VARCHAR}, #{htell,jdbcType=VARCHAR}, 
+      #{sfathername,jdbcType=VARCHAR}, #{sftell,jdbcType=VARCHAR}, #{smothername,jdbcType=VARCHAR}, 
+      #{smtell,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzGeorge.app.dao.entity.StudentInfo" >
+    insert into studentinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="scode != null" >
+        scode,
+      </if>
+      <if test="ssex != null" >
+        ssex,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="snp != null" >
+        snp,
+      </if>
+      <if test="tell != null" >
+        tell,
+      </if>
+      <if test="tels != null" >
+        tels,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="sliving != null" >
+        sliving,
+      </if>
+      <if test="slive != null" >
+        slive,
+      </if>
+      <if test="youbian != null" >
+        youbian,
+      </if>
+      <if test="htell != null" >
+        htell,
+      </if>
+      <if test="sfathername != null" >
+        sfathername,
+      </if>
+      <if test="sftell != null" >
+        sftell,
+      </if>
+      <if test="smothername != null" >
+        smothername,
+      </if>
+      <if test="smtell != null" >
+        smtell,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        #{sno,jdbcType=INTEGER},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="scode != null" >
+        #{scode,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="snp != null" >
+        #{snp,jdbcType=VARCHAR},
+      </if>
+      <if test="tell != null" >
+        #{tell,jdbcType=VARCHAR},
+      </if>
+      <if test="tels != null" >
+        #{tels,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="sliving != null" >
+        #{sliving,jdbcType=VARCHAR},
+      </if>
+      <if test="slive != null" >
+        #{slive,jdbcType=VARCHAR},
+      </if>
+      <if test="youbian != null" >
+        #{youbian,jdbcType=VARCHAR},
+      </if>
+      <if test="htell != null" >
+        #{htell,jdbcType=VARCHAR},
+      </if>
+      <if test="sfathername != null" >
+        #{sfathername,jdbcType=VARCHAR},
+      </if>
+      <if test="sftell != null" >
+        #{sftell,jdbcType=VARCHAR},
+      </if>
+      <if test="smothername != null" >
+        #{smothername,jdbcType=VARCHAR},
+      </if>
+      <if test="smtell != null" >
+        #{smtell,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lzGeorge.app.dao.entity.StudentInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from studentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update studentinfo
+    <set >
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=INTEGER},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null" >
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scode != null" >
+        scode = #{record.scode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null" >
+        ssex = #{record.ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sn != null" >
+        sn = #{record.sn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.snp != null" >
+        snp = #{record.snp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tell != null" >
+        tell = #{record.tell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tels != null" >
+        tels = #{record.tels,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sliving != null" >
+        sliving = #{record.sliving,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slive != null" >
+        slive = #{record.slive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.youbian != null" >
+        youbian = #{record.youbian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htell != null" >
+        htell = #{record.htell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfathername != null" >
+        sfathername = #{record.sfathername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sftell != null" >
+        sftell = #{record.sftell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smothername != null" >
+        smothername = #{record.smothername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smtell != null" >
+        smtell = #{record.smtell,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update studentinfo
+    set sno = #{record.sno,jdbcType=INTEGER},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      scode = #{record.scode,jdbcType=VARCHAR},
+      ssex = #{record.ssex,jdbcType=VARCHAR},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      snp = #{record.snp,jdbcType=VARCHAR},
+      tell = #{record.tell,jdbcType=VARCHAR},
+      tels = #{record.tels,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      sliving = #{record.sliving,jdbcType=VARCHAR},
+      slive = #{record.slive,jdbcType=VARCHAR},
+      youbian = #{record.youbian,jdbcType=VARCHAR},
+      htell = #{record.htell,jdbcType=VARCHAR},
+      sfathername = #{record.sfathername,jdbcType=VARCHAR},
+      sftell = #{record.sftell,jdbcType=VARCHAR},
+      smothername = #{record.smothername,jdbcType=VARCHAR},
+      smtell = #{record.smtell,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzGeorge.app.dao.entity.StudentInfo" >
+    update studentinfo
+    <set >
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="scode != null" >
+        scode = #{scode,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        ssex = #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="snp != null" >
+        snp = #{snp,jdbcType=VARCHAR},
+      </if>
+      <if test="tell != null" >
+        tell = #{tell,jdbcType=VARCHAR},
+      </if>
+      <if test="tels != null" >
+        tels = #{tels,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="sliving != null" >
+        sliving = #{sliving,jdbcType=VARCHAR},
+      </if>
+      <if test="slive != null" >
+        slive = #{slive,jdbcType=VARCHAR},
+      </if>
+      <if test="youbian != null" >
+        youbian = #{youbian,jdbcType=VARCHAR},
+      </if>
+      <if test="htell != null" >
+        htell = #{htell,jdbcType=VARCHAR},
+      </if>
+      <if test="sfathername != null" >
+        sfathername = #{sfathername,jdbcType=VARCHAR},
+      </if>
+      <if test="sftell != null" >
+        sftell = #{sftell,jdbcType=VARCHAR},
+      </if>
+      <if test="smothername != null" >
+        smothername = #{smothername,jdbcType=VARCHAR},
+      </if>
+      <if test="smtell != null" >
+        smtell = #{smtell,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sno = #{sno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzGeorge.app.dao.entity.StudentInfo" >
+    update studentinfo
+    set classes = #{classes,jdbcType=VARCHAR},
+      sname = #{sname,jdbcType=VARCHAR},
+      scode = #{scode,jdbcType=VARCHAR},
+      ssex = #{ssex,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      snp = #{snp,jdbcType=VARCHAR},
+      tell = #{tell,jdbcType=VARCHAR},
+      tels = #{tels,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      sliving = #{sliving,jdbcType=VARCHAR},
+      slive = #{slive,jdbcType=VARCHAR},
+      youbian = #{youbian,jdbcType=VARCHAR},
+      htell = #{htell,jdbcType=VARCHAR},
+      sfathername = #{sfathername,jdbcType=VARCHAR},
+      sftell = #{sftell,jdbcType=VARCHAR},
+      smothername = #{smothername,jdbcType=VARCHAR},
+      smtell = #{smtell,jdbcType=VARCHAR}
+    where sno = #{sno,jdbcType=INTEGER}
+  </update>
+  <cache />
+  <select resultMap="BaseResultMap" parameterType="com.lzGeorge.app.dao.entity.StudentInfoCriteria" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from studentinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
