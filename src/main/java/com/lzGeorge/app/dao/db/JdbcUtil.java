@@ -15,11 +15,11 @@ public final class JdbcUtil {
 
     static {
         try {
-            pr.load(JdbcUtil.class.getClassLoader().getResourceAsStream("db.properties"));
-            driver = pr.getProperty("driver");
-            url = pr.getProperty("url");
-            user = pr.getProperty("username");
-            password = pr.getProperty("password");
+            pr.load(JdbcUtil.class.getClassLoader().getResourceAsStream("jdbc.properties"));
+            driver = pr.getProperty("jdbc.driver");
+            url = pr.getProperty("jdbc.url");
+            user = pr.getProperty("jdbc.username");
+            password = pr.getProperty("jdbc.password");
             Class.forName(driver);
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e);
@@ -49,5 +49,16 @@ public final class JdbcUtil {
                     }
             }
         }
+    }
+
+
+    public static void main(String[] args) {
+        try {
+            Connection connection = getConnection();
+            free(null, null, connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("good");
     }
 }

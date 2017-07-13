@@ -107,7 +107,6 @@
 
     });
 
-
     function loginS() {
         var username = $("#sno").val();
         var password = $("#longTel").val();
